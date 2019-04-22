@@ -1,0 +1,6 @@
+.sub-panel {
+    display: inline;
+    width: 10em;
+    overflow: scroll;
+    position: relative;
+}

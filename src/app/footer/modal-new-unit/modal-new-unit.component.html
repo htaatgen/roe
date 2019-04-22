@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>New Unit</h1>
+<div mat-dialog-content>
+    <div>
+        Name: <input [value]="unit.name" (input)="unit.name = $event.target.value">
+    </div>
+    <div>
+        Available attributes:
+        <div *ngFor="let attribute of listAttributes()" (click)="addAttribute(attribute)">
+            {{attribute.name}}
+        </div>
+    </div>
+    <div>
+        Selected attributes:
+        <div *ngFor="let attributes of unit.attributes">
+            {{attributes.name}}
+        </div>
+    </div>
+    <div>
+        {{calculateUnitStats() | json}}
+    </div>
+    <div>
+        <button (click)="addUnit()"></button>
+    </div>
+</div>

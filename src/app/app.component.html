@@ -1,0 +1,9 @@
+<app-header></app-header>
+
+<canvas #mainCanvas
+        (window:keydown)="ctrl.press($event.keyCode)"
+        (window:keyup)="ctrl.release($event.keyCode)"
+        (mousedown)="ctrl.mousePress($event.x, $event.y)"
+        (mouseup)="ctrl.mouseRelease($event.x, $event.y)"
+></canvas>
+<app-footer></app-footer>

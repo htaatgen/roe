@@ -1,0 +1,8 @@
+<h1>{{selection.settlement.value.nameRoot}}</h1>
+
+<div *ngFor="let population of selection.settlement.value.populations">
+    {{population.name}}
+    mil: {{population.militarySkill}} admin: {{population.administrativeSkill}} econ: {{population.economicSkill}}
+</div>
+
+<input type="button" (click)="openTechtree()" value="Techtree">

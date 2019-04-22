@@ -1,0 +1,7 @@
+.resource-list {
+    list-style: none;
+    display:flex;
+    flex-flow: row;
+    max-height: 6em;
+    padding: 3px;
+}

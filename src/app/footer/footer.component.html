@@ -1,0 +1,23 @@
+<footer>
+    <div class="panel-holder" *ngIf="!isNullOrUndefined(selection.tile.value)">
+        <div class="panel" *ngIf="isNullOrUndefined(selection.settlement.value)">
+            <app-tile></app-tile>
+        </div>
+        <div class="panel" *ngIf="!isNullOrUndefined(selection.settlement.value)">
+            <app-settlement></app-settlement>
+            <app-tile></app-tile>
+            <app-unit></app-unit>
+        </div>
+        <div class="panel" *ngIf="!isNullOrUndefined(selection.settlement.value) || selection.tile.value.armies.length > 0">
+            <app-army></app-army>
+        </div>
+
+
+        <!--<div class="panel" *ngIf="settlement">-->
+            <!--<app-unit></app-unit>-->
+        <!--</div>-->
+        <!--<div class="panel" *ngIf="settlement">-->
+            <!---->
+        <!--</div>-->
+    </div>
+</footer>

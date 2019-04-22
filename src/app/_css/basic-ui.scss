@@ -1,0 +1,44 @@
+@import 'variables';
+
+button {
+  background-color: $background;
+  text-align: center;
+  text-decoration: none;
+  margin: 3px;
+  border: 2px groove;
+  border-color: $border-light $border-light $border-dark $border-dark;
+  color: $text-medium;
+  font-size: x-small;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  color: $text-light;
+}
+
+button:active {
+  border-color: $border-dark $border-dark $border-light $border-light;
+}
+
+h1 {
+  font-family: roe2Title !important;
+  color: $text-medium;
+  font-size: medium;
+  margin-top:2px;
+  margin-bottom:2px;
+}
+
+.ul-nav {
+  list-style: none;
+  display:flex;
+  flex-flow: row;
+  margin: 0;
+  padding:0;
+}
+
+button.selected {
+  background: darkgray;
+}

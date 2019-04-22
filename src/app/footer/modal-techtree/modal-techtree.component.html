@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Settlement techtree</h1>
+<div mat-dialog-content>
+    <div>
+        Researching:
+        <div *ngFor="let research of currentlyResearching">
+            <div class="progress-bar"><mat-progress-bar mode="determinate" [value]="100*research.progress/research.techItem.researchTime"></mat-progress-bar></div>
+            {{research.techItem.name}}
+        </div>
+    </div>
+    <div>
+        Available:
+        <div *ngFor="let tech of availableTechnologies" (click)="research(tech)">
+            {{tech.name}}
+        </div>
+    </div>
+    <div>
+        Researched:
+        <div *ngFor="let tech of selection.settlement.value.techtree">
+            {{tech.name}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="unit-list">
+    <div class="unit-tile">
+        <input type="button" (click)="openNewUnit()" value="New">
+    </div>
+    <div *ngFor="let unit of units" (click)="buildUnit(unit)" class="unit-tile">
+        <img [src]="gfx[unit.image[0]][unit.image[1]].src">
+        <div class="unit-name">
+            {{unit.name}}
+        </div>
+    </div>
+</div>

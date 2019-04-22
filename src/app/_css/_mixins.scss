@@ -1,0 +1,10 @@
+@import 'variables';
+
+@mixin basic-panel {
+  padding: 0.5em 1em;
+  background-color: $background;
+  color: $text-light;
+  margin: 3px;
+  border: 3px groove;
+  border-color: $border-light $border-light $border-dark $border-dark;
+}

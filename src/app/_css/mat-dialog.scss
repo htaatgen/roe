@@ -1,0 +1,7 @@
+@import 'mixins';
+
+mat-dialog-container, .mat-dialog-container {
+    @include basic-panel();
+    border-radius: 0 !important;
+    padding-top: 6px !important;
+}

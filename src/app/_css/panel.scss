@@ -1,0 +1,14 @@
+@import 'mixins';
+
+.panel-holder {
+    display: flex;
+    flex-direction: row;
+    vertical-align: bottom;
+}
+
+.panel {
+    @include basic-panel();
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+}

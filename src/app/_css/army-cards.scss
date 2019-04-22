@@ -1,0 +1,24 @@
+@import "variables";
+
+.army-tile {
+    position: relative;
+    height: 64px;
+    width: 48px;
+    font-size: x-small;
+    border: 1px solid $border-light;
+    margin: 2px;
+}
+
+.army-name {
+    background-color: $background;
+    position: absolute;
+    bottom: 0;
+    width:100%;
+}
+
+.army-list {
+    list-style: none;
+    display:flex;
+    flex-flow: row;
+    width: 100px;
+}
