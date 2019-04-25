@@ -1,5 +1,5 @@
 <footer>
-    <div class="panel-holder" *ngIf="!isNullOrUndefined(selection.tile.value)">
+    <div class="panel-holder" *ngIf="!isNullOrUndefined(selection.tile.value) && selection.tile.value.discovered">
         <div class="panel" *ngIf="isNullOrUndefined(selection.settlement.value)">
             <app-tile></app-tile>
         </div>

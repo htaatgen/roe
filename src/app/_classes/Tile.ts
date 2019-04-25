@@ -33,6 +33,7 @@ export class Tile {
     public features: TileFeature[] = [];
     public armies: Army[] = [];
     public owningEmpire: Empire = null;
+    public discovered: boolean = false;
 
     constructor(x: number, y: number) {
         this.x = x;
@@ -90,10 +91,10 @@ export class Tile {
         });
     }
 
-    eachNeighbour(test) {
+    eachNeighbour(task) {
         return Object.values(this.neighbours).forEach((neighbour: any) => {
             if (neighbour !== undefined) {
-                test(neighbour);
+                task(neighbour);
             }
         });
     }

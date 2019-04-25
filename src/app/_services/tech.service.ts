@@ -19,7 +19,7 @@ export class TechService {
         logicLoop.subscribe(time => {
             this.researching.forEach(
                 (research, key) => {
-                    if (research.progress*100 > research.techItem.researchTime) {
+                    if (research.progress > research.techItem.researchTime) {
                         research.target.push(research.techItem);
                         this.researching.splice(key, 1);
                         this.researchComplete.next({message: 'Research complete: ' + research.techItem.name})

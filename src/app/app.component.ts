@@ -9,6 +9,9 @@ import {PathsService} from "./_services/paths.service";
 import {BattleService} from "./_services/battle.service";
 import {TechService} from "./_services/tech.service";
 import {BakeService} from "./_services/bake.service";
+import {MatDialog} from "@angular/material";
+import {ModalNewGameComponent} from "./modal-new-game/modal-new-game.component";
+import {PlayerService} from "./_services/player.service";
 
 @Component({
     selector: 'app-root',
@@ -17,6 +20,7 @@ import {BakeService} from "./_services/bake.service";
 })
 export class AppComponent implements OnInit {
     @ViewChild('mainCanvas') mainCanvas: ElementRef;
+    loadingMessage:string = 'Loading...';
 
     constructor(public view: ViewService,
                 private map: MapService,
@@ -27,16 +31,22 @@ export class AppComponent implements OnInit {
                 private battles: BattleService,
                 private paths: PathsService,
                 private tech: TechService,
-                private bake: BakeService
+                private bake: BakeService,
+                private player: PlayerService,
+                private dialog: MatDialog
     ) {
     }
 
     ngOnInit() {
         this.gfx.load().subscribe(imageCount => {
+            this.loadingMessage = 'Loading images: '+imageCount+' remaining...';
             if (imageCount == 0) {
+                this.loadingMessage = 'Initialising map...';
                 this.view.setCanvas(this.mainCanvas, 0, 0, window.innerHeight - 5, window.innerWidth);
                 this.map.initMap(80, 80);
+                this.loadingMessage = 'Baking tiles...';
                 this.map.tiles.forEach(tile => this.bake.bakeImage(tile));
+                this.loadingMessage = 'Creating time...';
                 this.gl.startLoop();
                 this.gl.renderLoop.subscribe(delta => {
                     this.input.handle();
@@ -46,7 +56,22 @@ export class AppComponent implements OnInit {
                 this.paths.startPathsUpdating(this.gl.logicLoop);
                 this.battles.startBattlesUpdating(this.gl.logicLoop);
                 this.tech.startResearchUpdating(this.gl.logicLoop);
+
+                this.loadingMessage = 'Done...';
+                this.openNewGame();
             }
         })
+    }
+
+    openNewGame(): void {
+        this.dialog.open(ModalNewGameComponent, {
+            height: '400px',
+            width: '600px',
+            panelClass: 'modal',
+            disableClose: true
+        }).afterClosed().subscribe(()=>{
+            this.loadingMessage = null;
+            this.view.set(this.player.empire.capital.tile.x, this.player.empire.capital.tile.y);
+        });
     }
 }

@@ -18,6 +18,11 @@ import {ModalNewUnitComponent} from './footer/modal-new-unit/modal-new-unit.comp
 import {ArmyComponent} from './footer/army/army.component';
 import {MessageComponent} from './header/message/message.component';
 import {ModalTechtreeComponent} from './footer/modal-techtree/modal-techtree.component';
+import {SidebarRightComponent} from './sidebar-right/sidebar-right.component';
+import {ListArmiesComponent} from './sidebar-right/list-armies/list-armies.component';
+import {ListResearchComponent} from './sidebar-right/list-research/list-research.component';
+import {ListSettlementsComponent} from './sidebar-right/list-settlements/list-settlements.component';
+import {ModalNewGameComponent} from './modal-new-game/modal-new-game.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +36,12 @@ import {ModalTechtreeComponent} from './footer/modal-techtree/modal-techtree.com
         ModalNewUnitComponent,
         ArmyComponent,
         MessageComponent,
-        ModalTechtreeComponent
+        ModalTechtreeComponent,
+        SidebarRightComponent,
+        ListArmiesComponent,
+        ListResearchComponent,
+        ListSettlementsComponent,
+        ModalNewGameComponent
     ],
     imports: [
         BrowserModule,
@@ -48,6 +58,7 @@ import {ModalTechtreeComponent} from './footer/modal-techtree/modal-techtree.com
         UnitComponent,
         ModalNewUnitComponent,
         ModalTechtreeComponent,
+        ModalNewGameComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

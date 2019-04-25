@@ -1,0 +1,9 @@
+@import 'mixins';
+
+.list-panel {
+  padding: 0.5em;
+  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}

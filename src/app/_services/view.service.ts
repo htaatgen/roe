@@ -29,8 +29,8 @@ export class ViewService {
     }
 
     set(x: number, y: number) {
-        this.viewport.x = x;
-        this.viewport.y = y;
+        this.viewport.x = x - this.viewport.width/2;
+        this.viewport.y = y - this.viewport.height/2;
     }
 
     render(tiles) {
@@ -42,7 +42,7 @@ export class ViewService {
         //Which tiles are in view?
         tiles.forEach(tile => {
             const location = this.toReal(tile.x, tile.y);
-            if (this.inViewport(location.x, location.y)) {
+            if (this.inViewport(location.x, location.y) && tile.discovered) {
                 tilesInView.push(tile);
             }
         });

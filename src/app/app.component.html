@@ -6,4 +6,10 @@
         (mousedown)="ctrl.mousePress($event.x, $event.y)"
         (mouseup)="ctrl.mouseRelease($event.x, $event.y)"
 ></canvas>
+<app-sidebar-right></app-sidebar-right>
 <app-footer></app-footer>
+<div class="loading-screen" *ngIf="loadingMessage !== null">
+    <div class="title-box panel">
+    {{loadingMessage}}
+    </div>
+</div>
