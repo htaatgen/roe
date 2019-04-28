@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MapService} from "./map.service";
 import {BattleFront} from "../_classes/BattleFront";
+import {Tile} from "../_classes/Tile";
 
 @Injectable({
     providedIn: 'root'
@@ -82,8 +83,12 @@ export class BattleService {
         })
     }
 
-    private handleConquest(tile) {
+    private handleConquest(tile: Tile) {
         tile.owningEmpire = tile.armies[0].owningEmpire;
+        tile.armies[0].owningEmpire.territory.push(tile);
+        if (tile.hasSettlement()) {
+            tile.armies[0].owningEmpire.ownedSettlements.push(tile.getSettlement());
+        }
     };
 
 }

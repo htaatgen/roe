@@ -66,6 +66,15 @@ export class Tile {
         return this.features.find(element => element.name == featureName);
     }
 
+    hasSettlement(): boolean {
+        this.features.forEach(element => {
+            if (element instanceof TileFeatureSettlement) {
+                return true
+            }
+        });
+        return false;
+    }
+
     getSettlement(): TileFeatureSettlement {
         let settlement = null;
         this.features.forEach(element => {

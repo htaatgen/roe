@@ -20,7 +20,7 @@ import {PlayerService} from "./_services/player.service";
 })
 export class AppComponent implements OnInit {
     @ViewChild('mainCanvas') mainCanvas: ElementRef;
-    loadingMessage:string = 'Loading...';
+    loadingMessage: string = 'Loading...';
 
     constructor(public view: ViewService,
                 private map: MapService,
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.gfx.load().subscribe(imageCount => {
-            this.loadingMessage = 'Loading images: '+imageCount+' remaining...';
+            this.loadingMessage = 'Loading images: ' + imageCount + ' remaining...';
             if (imageCount == 0) {
                 this.loadingMessage = 'Initialising map...';
                 this.view.setCanvas(this.mainCanvas, 0, 0, window.innerHeight - 5, window.innerWidth);
@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
             width: '600px',
             panelClass: 'modal',
             disableClose: true
-        }).afterClosed().subscribe(()=>{
+        }).afterClosed().subscribe(() => {
             this.loadingMessage = null;
             this.view.set(this.player.empire.capital.tile.x, this.player.empire.capital.tile.y);
         });

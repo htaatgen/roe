@@ -12,6 +12,7 @@ export class Army {
         this.location = location;
         this.id = window.performance.now();
         this.owningEmpire = location.owningEmpire;
+        location.owningEmpire.armies.push(this);
     }
 
     move(newLocation: Tile) {

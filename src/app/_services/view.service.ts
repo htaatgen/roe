@@ -14,7 +14,7 @@ export class ViewService {
     }
 
     setCanvas(canvasElement, x: number, y: number, height, width) {
-        this.viewport = {x: x, y: y, height: height, width: width}
+        this.viewport = {x: x, y: y, height: height, width: width};
 
         this.ctx = canvasElement.nativeElement.getContext('2d');
 
@@ -29,8 +29,8 @@ export class ViewService {
     }
 
     set(x: number, y: number) {
-        this.viewport.x = x - this.viewport.width/2;
-        this.viewport.y = y - this.viewport.height/2;
+        this.viewport.x = -(x - y) * 64 + (this.viewport.width/2);
+        this.viewport.y = -(x + y) * 32 + (this.viewport.height/2);
     }
 
     render(tiles) {
@@ -42,7 +42,7 @@ export class ViewService {
         //Which tiles are in view?
         tiles.forEach(tile => {
             const location = this.toReal(tile.x, tile.y);
-            if (this.inViewport(location.x, location.y) && tile.discovered) {
+            if (tile.discovered && this.inViewport(location.x, location.y)) {
                 tilesInView.push(tile);
             }
         });
@@ -113,7 +113,7 @@ export class ViewService {
                 this.ctx.fillStyle = tile.owningEmpire.colour;
                 this.ctx.fillRect(location.x + 12 - 0.5 * textWidth, location.y + 26, textWidth + 6, 11);
                 this.ctx.globalAlpha = 1.0;
-                this.ctx.fillStyle = '#ffffff'
+                this.ctx.fillStyle = '#ffffff';
                 this.ctx.fillText(settlement.nameRoot, location.x + 15 - 0.5 * textWidth, location.y + 35)
             }
         });
@@ -131,14 +131,14 @@ export class ViewService {
     toReal(x, y) {
         return {
             x: (x - y) * 64 + this.viewport.x,
-            y: ((x + y) / 2) * 64 + this.viewport.y
+            y: (x + y) * 32 + this.viewport.y
         }
     }
 
     inViewport(x, y) {
-        return (x > -2 * 64
-            && x < this.viewport.width + 2 * 64
-            && y > -2 * 64
-            && y < this.viewport.height + 2 * 64);
+        return (x > -128
+            && x < this.viewport.width + 128
+            && y > -128
+            && y < this.viewport.height + 128);
     }
 }

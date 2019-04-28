@@ -1,0 +1,12 @@
+<div class="list-panel">
+    <div *ngFor="let research of tech.researching">
+        <div *ngIf="research.owner.id === player.empire.id">
+            <div class="progress-bar">
+                <mat-progress-bar mode="determinate" [value]="100*research.progress/research.techItem.researchTime">
+                </mat-progress-bar>
+            </div>
+            {{research.techItem.name}} -
+            {{research.owner.capital.nameBase}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>New Game</h1>
+<div mat-dialog-content>
+    Select Empire:
+    <select (change)="setEmpire($event.target.value)">
+        <option></option>
+        <option *ngFor="let empire of map.empires" [value]="empire.id">
+            {{empire.name}}
+        </option>
+    </select>
+
+    <div *ngIf="player.empire !== undefined">
+        <h1 [style.background-color]="player.empire.colour">{{player.empire.name}}</h1>
+        Capital: {{player.empire.capital.nameBase}}<br>
+        Biome: {{createBiomeName(player.empire.capital.tile)}}<br><br>
+
+        <input type="button" [value]="'Select ' + player.empire.name + '?'" (click)="player.startGame(); dialogRef.close()">
+    </div>
+</div>

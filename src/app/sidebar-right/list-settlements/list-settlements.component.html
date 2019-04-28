@@ -1,0 +1,5 @@
+<div class="list-panel" *ngIf="player.empire !== undefined">
+  <div *ngFor="let settlement of player.empire.ownedSettlements">
+   {{settlement.nameBase}} - {{settlement.x}}, {{settlement.y}}
+  </div>
+</div>

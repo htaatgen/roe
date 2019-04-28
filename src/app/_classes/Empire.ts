@@ -9,9 +9,8 @@ import {TechItem} from "../_models/TechItem";
 export class Empire {
     id: number;
     capital: TileFeatureSettlement;
-    homelands: Tile[] = [];
+    ownedSettlements: TileFeatureSettlement[] = [];
     territory: Tile[] = [];
-    occupied: Tile[] = [];
 
     armies: Army[] = [];
     units: UnitBlueprint[] = [];
@@ -30,7 +29,8 @@ export class Empire {
         this.name = this.capital.nameMultiple;
 
         this.colour = ColourHelper.createColour();
-        this.homelands.push(this.capital.tile);
+        this.territory.push(this.capital.tile);
+        this.ownedSettlements.push(this.capital);
     }
 
     destroy(){

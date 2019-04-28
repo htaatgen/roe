@@ -62,7 +62,7 @@ export class InputService {
         const location = this.view.toMap(this.ctrl.clickLocation.x, this.ctrl.clickLocation.y);
         const selectedTile = this.map.findTileByCoordinates(Math.round(location.x) - 1, Math.round(location.y));
         let path = this.map.getPath(this.selection.army.value.location, selectedTile);
-        if (path[0] && path[1]) {
+        if (!isNullOrUndefined(path) && path[0] && path[1]) {
             this.paths.paths.push(new Path(path, this.selection.army.value));
         }
         this.unSelectArmy();

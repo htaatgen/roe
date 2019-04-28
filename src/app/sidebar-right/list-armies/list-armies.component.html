@@ -1,0 +1,5 @@
+<div class="list-panel" *ngIf="player.empire !== undefined">
+  <div *ngFor="let army of player.empire.armies">
+    {{army.id}} - {{army.units.length}} - {{army.location.x}}, {{army.location.y}}
+  </div>
+</div>
