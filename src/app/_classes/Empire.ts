@@ -4,7 +4,7 @@ import {Army} from "./Army";
 import {Lexicon} from "./Lexicon";
 import {ColourHelper} from "../_helpers/colour.helper";
 import {UnitBlueprint} from "./UnitBlueprint";
-import {TechItem} from "../_models/TechItem";
+import {TechItem} from "../_interfaces/TechItem";
 
 export class Empire {
     id: number;

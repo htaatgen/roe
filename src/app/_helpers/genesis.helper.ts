@@ -77,8 +77,8 @@ export class GenesisHelper {
                 neighbourAmount++;
             });
 
-            tile.height = (tile.height + 2 * neighbourHeights) / neighbourAmount;
-            tile.moisture = (tile.moisture + 1 * neighbourMoisture) / (3 * neighbourAmount);
+            tile.height = (tile.height + 2.5 * neighbourHeights) / neighbourAmount;
+            tile.moisture = (tile.moisture + 2 * neighbourMoisture) / (3 * neighbourAmount);
         })
 
         //Fill with appropriate tiles/features
@@ -90,10 +90,8 @@ export class GenesisHelper {
         });
 
         map.forEach(tile => {
-
             setTileTransitions(tile);
 
-            tile.updateRenderOrders();
             if (tile.height >= 0) {
                 let chance = 0.05;
                 tile.eachNeighbour(neighbour => {
@@ -126,7 +124,7 @@ export class GenesisHelper {
     }
 }
 
-function setCoasts(tile:Tile){
+function setCoasts(tile: Tile) {
     if (tile.height >= 0) {
         let coastCode = '';
         if (!isNullOrUndefined(tile.neighbours.north) && tile.neighbours.north.height < 0) {
@@ -143,40 +141,44 @@ function setCoasts(tile:Tile){
         }
         if (coastCode.length > 0) {
             tile.coast = coastCode;
-            tile.tileModifiers.push(['coast', coastCode + '_' + Math.ceil(Math.random() * 1)]);
+            if (coastCode == 'nsew') {
+                tile.tileModifiers.push(['coast', coastCode + '_' + Math.ceil(Math.random() * 3)]);
+            } else {
+                tile.tileModifiers.push(['coast', coastCode + '_' + Math.ceil(Math.random() * 1)]);
+            }
         }
-        if(!isNullOrUndefined(tile.neighbours.northwest)
+        if (!isNullOrUndefined(tile.neighbours.northwest)
             && tile.neighbours.northwest.height < 0
             && !coastCode.includes('w')
             && !coastCode.includes('n')
-        ){
+        ) {
             tile.tileModifiers.push(['coast', 'cnw_' + Math.ceil(Math.random() * 1)]);
         }
-        if(!isNullOrUndefined(tile.neighbours.northeast)
+        if (!isNullOrUndefined(tile.neighbours.northeast)
             && tile.neighbours.northeast.height < 0
             && !coastCode.includes('e')
             && !coastCode.includes('n')
-        ){
+        ) {
             tile.tileModifiers.push(['coast', 'cne_' + Math.ceil(Math.random() * 1)]);
         }
-        if(!isNullOrUndefined(tile.neighbours.southwest)
+        if (!isNullOrUndefined(tile.neighbours.southwest)
             && tile.neighbours.southwest.height < 0
             && !coastCode.includes('w')
             && !coastCode.includes('s')
-        ){
+        ) {
             tile.tileModifiers.push(['coast', 'csw_' + Math.ceil(Math.random() * 1)]);
         }
-        if(!isNullOrUndefined(tile.neighbours.southeast)
+        if (!isNullOrUndefined(tile.neighbours.southeast)
             && tile.neighbours.southeast.height < 0
             && !coastCode.includes('s')
             && !coastCode.includes('e')
-        ){
+        ) {
             tile.tileModifiers.push(['coast', 'cse_' + Math.ceil(Math.random() * 1)]);
         }
     }
 }
 
-function setBiome(tile:Tile){
+function setBiome(tile: Tile) {
     if (tile.height < -2) {
         tile.biome = 'Deep water';
         tile.image = ['tiles', 'ocean'];
@@ -200,82 +202,54 @@ function setBiome(tile:Tile){
     }
 }
 
-function setForests(tile:Tile){
+function setForests(tile: Tile) {
     if (tile.height > 0) {
-        if (tile.biome == 'Arctic') {
-            for (let i = 0; i < tile.moisture + Math.random() * 40; i++) {
+        if (tile.biome == 'Arctic' && tile.moisture > 0.1) {
                 tile.addFeature(TileFeatureForestSnow);
-            }
         } else if (tile.temperature < -3 && tile.moisture > 0) {
-            for (let i = 0; i < tile.moisture + Math.random() * 40; i++) {
                 tile.addFeature(TileFeatureForestPine);
-            }
         } else if (tile.temperature > -2 && tile.moisture > 0.1) {
-            for (let i = 0; i < tile.moisture + Math.random() * 40; i++) {
-            tile.addFeature(TileFeatureForestJungle);
-            }
+                tile.addFeature(TileFeatureForestJungle);
         } else if (tile.moisture > 0) {
-            for (let i = 0; i < tile.moisture + Math.random() * 40; i++) {
                 tile.addFeature(TileFeatureForestTemp);
-            }
         }
     }
 }
 
-function setMountains(tile:Tile){
+function setMountains(tile: Tile) {
     if (tile.height > 5) {
         tile.addFeature(TileFeatureMountainPeak);
-        tile.addFeature(TileFeatureMountainPeak);
-        tile.addFeature(TileFeatureMountainPeak);
-        tile.addFeature(TileFeatureMountainPeak);
         tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountainLow);
         tile.addFeature(TileFeatureMountainLow);
         tile.travellingTime *= 6;
     } else if (tile.height > 3) {
         tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountain);
-        tile.addFeature(TileFeatureMountainLow);
-        tile.addFeature(TileFeatureMountainLow);
-        tile.addFeature(TileFeatureMountainLow);
         tile.addFeature(TileFeatureMountainLow);
         tile.travellingTime *= 4;
     } else if (tile.height > 1.6) {
-        tile.addFeature(TileFeatureMountainLow);
-        tile.addFeature(TileFeatureMountainLow);
-        tile.addFeature(TileFeatureMountainLow);
-        tile.addFeature(TileFeatureMountainLow);
         tile.addFeature(TileFeatureMountainLow);
         tile.travellingTime *= 1.5;
     }
 }
 
-function setTileTransitions(tile: Tile){
-    if (tile.biome !== 'Grassland' && tile.height > 0){
+function setTileTransitions(tile: Tile) {
+    if (tile.biome !== 'Grassland' && tile.height > 0) {
         let tileTransitionCode = '';
         if (!isNullOrUndefined(tile.neighbours.north) && tile.neighbours.north.biome === 'Grassland') {
             tile.tileModifiers.unshift(['tile_edges', 'grass_n_' + Math.ceil(Math.random() * 1)]);
-            tileTransitionCode +='n';
+            tileTransitionCode += 'n';
         }
         if (!isNullOrUndefined(tile.neighbours.south) && tile.neighbours.south.biome === 'Grassland') {
             tile.tileModifiers.unshift(['tile_edges', 'grass_s_' + Math.ceil(Math.random() * 1)]);
-            tileTransitionCode +='s';
+            tileTransitionCode += 's';
         }
         if (!isNullOrUndefined(tile.neighbours.east) && tile.neighbours.east.biome === 'Grassland') {
             tile.tileModifiers.unshift(['tile_edges', 'grass_e_' + Math.ceil(Math.random() * 1)]);
-            tileTransitionCode +='e';
+            tileTransitionCode += 'e';
         }
         if (!isNullOrUndefined(tile.neighbours.west) && tile.neighbours.west.biome === 'Grassland') {
             tile.tileModifiers.unshift(['tile_edges', 'grass_w_' + Math.ceil(Math.random() * 1)]);
-            tileTransitionCode +='w';
+            tileTransitionCode += 'w';
         }
         if (!isNullOrUndefined(tile.neighbours.northeast)
             && tile.neighbours.northeast.biome === 'Grassland'

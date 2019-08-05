@@ -43,8 +43,18 @@ export class Unit {
 
     destroy() {
         this.owningArmy.units.splice(this.owningArmy.units.findIndex(unit => unit.id === this.id), 1);
-        if(this.owningArmy.units.length == 0){
+        if (this.owningArmy.units.length == 0) {
             this.owningArmy.destroy();
+        }
+    }
+
+    toJson() {
+        return {
+            id: this.id,
+            name: this.name,
+            attributes: this.attributes,
+            image: this.image,
+            originTile: {x: this.originTile.x, y: this.originTile.y}
         }
     }
 }

@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {SelectionService} from "../../_services/selection.service";
 import {TechService} from "../../_services/tech.service";
 import {TechnologiesEnum} from "../../_enum/technologies";
-import {TechItem} from "../../_models/TechItem";
-import {TechItemResearch} from "../../_models/TechItemResearch";
+import {TechItem} from "../../_interfaces/TechItem";
+import {TechItemResearch} from "../../_interfaces/TechItemResearch";
 import {GameloopService} from "../../_services/gameloop.service";
 
 @Component({

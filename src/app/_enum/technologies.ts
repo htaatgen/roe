@@ -1,4 +1,4 @@
-import {TechItem} from "../_models/TechItem";
+import {TechItem} from "../_interfaces/TechItem";
 import {UnitAttribute} from "../_classes/UnitAttribute";
 import {UnitStats} from "../_classes/UnitStats";
 

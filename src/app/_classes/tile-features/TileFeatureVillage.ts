@@ -10,9 +10,7 @@ export class TileFeatureVillage extends TileFeature {
     nameMultiple: string;
 
     constructor(tile: Tile) {
-        super(tile);
-        this.image = ['features', 'village_' + Math.ceil(Math.random() * 2)];
-        this.renderPass = 2;
+        super(tile, 1, 3, 3,'village_',2);
         this.name = 'Village';
         this.lexicon = NameHelper.generateLexicon();
         this.nameBase = NameHelper.generateName(this.lexicon);

@@ -2,14 +2,15 @@ import {TileFeature} from "./TileFeature";
 import {TileFeatureSettlement} from "./tile-features/TileFeatureSettlement";
 import {Army} from "./Army";
 import {Empire} from "./Empire";
-import {NeighbourSet} from "../_models/NeighbourSet";
+import {NeighbourSet} from "../_interfaces/NeighbourSet";
+import {isNullOrUndefined} from "util";
 
 export class Tile {
     public x: number;
     public y: number;
     public image;
     public tileModifiers: string[][] = [];
-    public coast: string = null;
+    public coast: string = '';
     public neighbours: NeighbourSet = {
         north: null,
         south: null,
@@ -27,13 +28,16 @@ export class Tile {
     public travellingTime: number;
     public visited = false;
     public renderOrders = [[{x: this.x, y: this.y, img: this.image}], [], [], []];
-    public bakedImage: HTMLImageElement;
+    public bakedImage: HTMLImageElement[] = [];
     public bakeValid = false;
+    public location: any;
+    public availableFeatureLocations: any[] = [];
+    public featureLocationCount: number;
 
     public features: TileFeature[] = [];
     public armies: Army[] = [];
     public owningEmpire: Empire = null;
-    public discovered: boolean = false;
+    public discovered: boolean = true;
 
     constructor(x: number, y: number) {
         this.x = x;
@@ -53,8 +57,18 @@ export class Tile {
             this.renderOrders[0].push({x: 0, y: 0, img: tileModifier});
         });
 
+        this.features.sort((a, b) => b.renderOrder - a.renderOrder);
         this.features.forEach(feature => {
-            this.renderOrders[feature.renderPass].push(feature.renderOrders())
+            feature.setRenderLocations();
+            this.renderOrders[1] = this.renderOrders[1].concat(feature.renderOrders());
+        });
+
+        this.renderOrders[1].sort((a, b) => a.y - b.y);
+    }
+
+    getFeatureLocationBlockers() {
+        return this.tileModifiers.filter(tileModifier => {
+            return tileModifier[0] == 'coast';
         });
     }
 
@@ -67,12 +81,13 @@ export class Tile {
     }
 
     hasSettlement(): boolean {
+        let settlement = false;
         this.features.forEach(element => {
             if (element instanceof TileFeatureSettlement) {
-                return true
+                settlement = true;
             }
         });
-        return false;
+        return settlement;
     }
 
     getSettlement(): TileFeatureSettlement {
@@ -87,8 +102,7 @@ export class Tile {
 
     addFeature(feature) {
         this.features.push(new feature(this));
-        this.features.sort((a, b) => a.x - b.x);
-        this.updateRenderOrders();
+        this.features.sort((a, b) => b.renderOrder - a.renderOrder);
     }
 
     everyNeighbour(test) {
@@ -138,4 +152,37 @@ export class Tile {
 
         return resources.sort();
     }
+
+    toJson() {
+        return {
+            x: this.x,
+            y: this.y,
+            image: this.image,
+            tileModifiers: this.tileModifiers,
+            coast: this.coast,
+            biome: this.biome,
+            height: this.height,
+            moisture: this.moisture,
+            temperature: this.temperature,
+            travellingTime: this.travellingTime,
+            visited: this.visited,
+
+            features: this.features.map(feature => feature.toJson()),
+            armies: this.armies.map(army => army.toJson()),
+            owningEmpire: isNullOrUndefined(this.owningEmpire) ? null : this.owningEmpire.id,
+            discovered: this.discovered
+        }
+    }
+
+    getFeatureLocation(avoidEdges = '') {
+        if(avoidEdges.includes('n')){
+
+        }
+        let randomLocation = this.availableFeatureLocations.splice(Math.floor(Math.random() * this.availableFeatureLocations.length), 1);
+        if (randomLocation.length === 0) {
+            return null;
+        }
+        return randomLocation[0];
+    }
+
 }

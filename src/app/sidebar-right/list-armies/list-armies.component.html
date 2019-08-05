@@ -1,5 +1,7 @@
 <div class="list-panel" *ngIf="player.empire !== undefined">
-  <div *ngFor="let army of player.empire.armies">
-    {{army.id}} - {{army.units.length}} - {{army.location.x}}, {{army.location.y}}
-  </div>
+    <div *ngFor="let army of player.empire.armies" [style]="sanitizer.bypassSecurityTrustStyle(army.bannerStyle)">
+        {{army.units.length}} <span
+            *ngIf="army.location.hasSettlement()">{{army.location.getSettlement().nameBase}}</span>
+        <span *ngIf="!army.location.hasSettlement()">In the field.</span>
+    </div>
 </div>

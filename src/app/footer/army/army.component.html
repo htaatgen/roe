@@ -6,13 +6,16 @@
         </li>
         <li *ngFor="let army of selection.tile.value.armies">
             <button (click)="selectArmy(army)"
-                    [class]="selection.armySelected() && selection.army.value.id == army.id ? 'selected':''">
+                    [class]="selection.armySelected() && selection.army.value.id == army.id ? 'selected':''"
+                    [style]="sanitizer.bypassSecurityTrustStyle(army.bannerStyle)">
                 Army: {{army.units.length}}
             </button>
         </li>
     </ul>
     <div *ngIf="selection.armySelected()">
-        {{selection.army.value.owningEmpire.capital.nameSingular}} Army
+        <span [style]="sanitizer.bypassSecurityTrustStyle(selection.army.value.bannerStyle)">
+            {{selection.army.value.owningEmpire.capital.nameSingular}} Army
+        </span>
         <div class="unit-list">
             <div *ngFor="let unit of selection.army.value.units; let i = index" class="unit-tile">
                 <img [src]="gfx[unit.image[0]][unit.image[1]].src">

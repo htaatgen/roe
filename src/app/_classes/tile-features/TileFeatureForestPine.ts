@@ -6,9 +6,7 @@ import {Furs} from "../resources/Furs";
 
 export class TileFeatureForestPine extends TileFeature {
     constructor(tile: Tile) {
-        super(tile);
-        this.image = ['features', 'forest_pine_' + Math.ceil(Math.random() * 1)];
-        this.renderPass = 1;
+        super(tile, 40, 0, 0, 'forest_pine_', 3);
         this.name = 'Pine Forest';
        this.addedTravellingTime = 0.8;
        this.resources.push(new Lumber());

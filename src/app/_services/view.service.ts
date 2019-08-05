@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {GraphicsService} from "./graphics.service";
 import {PathsService} from "./paths.service";
 import {SelectionService} from "./selection.service";
+import {isNullOrUndefined} from "util";
 
 @Injectable({
     providedIn: 'root'
@@ -29,8 +30,8 @@ export class ViewService {
     }
 
     set(x: number, y: number) {
-        this.viewport.x = -(x - y) * 64 + (this.viewport.width/2);
-        this.viewport.y = -(x + y) * 32 + (this.viewport.height/2);
+        this.viewport.x = -(x - y) * 64 + (this.viewport.width / 2);
+        this.viewport.y = -(x + y) * 32 + (this.viewport.height / 2);
     }
 
     render(tiles) {
@@ -41,17 +42,24 @@ export class ViewService {
 
         //Which tiles are in view?
         tiles.forEach(tile => {
-            const location = this.toReal(tile.x, tile.y);
-            if (tile.discovered && this.inViewport(location.x, location.y)) {
+            tile.location = this.toReal(tile.x, tile.y);
+            if (tile.discovered && this.inViewport(tile.location.x, tile.location.y)) {
+                tile.location.x -= 20;
+                tile.location.y -= 20;
                 tilesInView.push(tile);
             }
         });
 
         //Render baked image
-        tilesInView.forEach(tile => {
-            const location = this.toReal(tile.x, tile.y);
-            this.ctx.drawImage(tile.bakedImage, location.x, location.y);
-        });
+        for (let renderPass = 0; renderPass <= 1; renderPass++) {
+            tilesInView.forEach(tile => {
+                if (!isNullOrUndefined(tile.bakedImage[renderPass])) {
+                    this.ctx.drawImage(tile.bakedImage[renderPass], tile.location.x, tile.location.y);
+                }
+            });
+        }
+
+        //Draw tile select marker
         if (this.selection.tile.value !== null) {
             const location = this.toReal(this.selection.tile.value.x, this.selection.tile.value.y);
             const img = this.gfx['ui']['reticule'];
@@ -105,16 +113,16 @@ export class ViewService {
 
         //Draw tile names
         tilesInView.forEach(tile => {
-            const settlement = tile.getSettlement();
-            if (settlement !== null) {
-                const location = this.toReal(tile.x+ settlement.x, tile.y + settlement.y);
+            if (tile.hasSettlement()) {
+                const settlement = tile.getSettlement();
+                const location = this.toReal(tile.x + settlement.locations[0].x, tile.y + settlement.locations[0].y);
                 const textWidth = this.ctx.measureText(settlement.nameRoot).width;
                 this.ctx.globalAlpha = 0.4;
                 this.ctx.fillStyle = tile.owningEmpire.colour;
-                this.ctx.fillRect(location.x + 12 - 0.5 * textWidth, location.y + 26, textWidth + 6, 11);
+                this.ctx.fillRect(location.x + 12 +50 - 0.5 * textWidth, location.y + 26 - 25, textWidth + 6, 11);
                 this.ctx.globalAlpha = 1.0;
                 this.ctx.fillStyle = '#ffffff';
-                this.ctx.fillText(settlement.nameRoot, location.x + 15 - 0.5 * textWidth, location.y + 35)
+                this.ctx.fillText(settlement.nameRoot, location.x + 15+50 - 0.5 * textWidth, location.y + 35 -25)
             }
         });
     }

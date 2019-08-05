@@ -10,28 +10,25 @@ import {Gemstones} from "../resources/Gemstones";
 
 export class TileFeatureMountainPeak extends TileFeature {
     constructor(tile: Tile) {
-        super(tile);
-        this.image = ['features', 'mountain_peak_' + Math.ceil(Math.random() * 2)];
-        this.renderPass = 2;
+        super(tile, 3, 1, 1, 'mountain_peak_', 2);
         this.name = 'Mountain Peaks';
-       this.addedTravellingTime = 0.25;
+        this.addedTravellingTime = 0.25;
+        this.resources.push(new Stone());
 
-       this.resources.push(new Stone());
-
-       if(Math.random() > 0.8) {
-           this.resources.push(new Iron());
-       }
-       if(Math.random() > 0.7) {
-           this.resources.push(new Copper());
-       }
-       if(Math.random() > 0.90) {
-           this.resources.push(new Gold());
-       }
-       if(Math.random() > 0.90) {
-           this.resources.push(new Silver());
-       }
-       if(Math.random() > 0.90) {
-           this.resources.push(new Gemstones());
-       }
+        if (Math.random() > 0.8) {
+            this.resources.push(new Iron());
+        }
+        if (Math.random() > 0.7) {
+            this.resources.push(new Copper());
+        }
+        if (Math.random() > 0.90) {
+            this.resources.push(new Gold());
+        }
+        if (Math.random() > 0.90) {
+            this.resources.push(new Silver());
+        }
+        if (Math.random() > 0.90) {
+            this.resources.push(new Gemstones());
+        }
     }
 }

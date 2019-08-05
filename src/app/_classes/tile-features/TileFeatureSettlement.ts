@@ -4,26 +4,21 @@ import {Resource} from "../Resource";
 import {Population} from "../Population";
 import {Empire} from "../Empire";
 import {Tile} from "../Tile";
-import {TechItem} from "../../_models/TechItem";
+import {TechItem} from "../../_interfaces/TechItem";
 
 export class TileFeatureSettlement extends TileFeature {
-    id: number;
     lexicon: any = {};
     nameBase: string;
     nameRoot: string;
     nameSingular: string;
     nameMultiple: string;
+
+    settlementLevel = 1;
+    populations: Population[] = [];
     techtree: TechItem[] = [];
 
-    settlementLevel: number;
-    populations: Population[] = [];
-
     constructor(tile: Tile, empire: Empire = null, population: Population = null) {
-        super(tile);
-        this.id = window.performance.now();
-        this.settlementLevel = 1;
-        this.image = ['features', 'settlement_' + this.settlementLevel + '_' + Math.ceil(Math.random() * 2)];
-        this.renderPass = 2;
+        super(tile, 1, 5, 3, 'settlement_1_', 2);
         this.name = 'Settlement';
         this.lexicon = NameHelper.generateLexicon();
         this.nameBase = NameHelper.generateName(this.lexicon);
@@ -31,6 +26,7 @@ export class TileFeatureSettlement extends TileFeature {
         this.nameSingular = this.nameBase + this.lexicon.suffix.singular;
         this.nameMultiple = this.nameBase + this.lexicon.suffix.multiple;
         this.addedTravellingTime = 1.1;
+
         if (population == null) {
             population = new Population(this, 'tribal', 0, 0, 0)
         }
@@ -39,9 +35,5 @@ export class TileFeatureSettlement extends TileFeature {
             empire = new Empire(this);
         }
         this.tile.owningEmpire = empire;
-    }
-
-    addResource(resource: Resource) {
-        this.resources.push(resource);
     }
 }

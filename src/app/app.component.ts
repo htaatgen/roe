@@ -8,7 +8,7 @@ import {InputService} from "./_services/input.service";
 import {PathsService} from "./_services/paths.service";
 import {BattleService} from "./_services/battle.service";
 import {TechService} from "./_services/tech.service";
-import {BakeService} from "./_services/bake.service";
+import {RenderService} from "./_services/render.service";
 import {MatDialog} from "@angular/material";
 import {ModalNewGameComponent} from "./modal-new-game/modal-new-game.component";
 import {PlayerService} from "./_services/player.service";
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
                 private battles: BattleService,
                 private paths: PathsService,
                 private tech: TechService,
-                private bake: BakeService,
+                private render: RenderService,
                 private player: PlayerService,
                 private dialog: MatDialog
     ) {
@@ -43,16 +43,18 @@ export class AppComponent implements OnInit {
             if (imageCount == 0) {
                 this.loadingMessage = 'Initialising map...';
                 this.view.setCanvas(this.mainCanvas, 0, 0, window.innerHeight - 5, window.innerWidth);
-                this.map.initMap(80, 80);
+                this.map.initMap(60, 60);
                 this.loadingMessage = 'Baking tiles...';
-                this.map.tiles.forEach(tile => this.bake.bakeImage(tile));
+                this.map.tiles.forEach(tile => this.render.determineAvailableFeatureLocations(tile));
+                this.map.tiles.forEach(tile => tile.updateRenderOrders());
+                this.map.tiles.forEach(tile => this.render.bakeImage(tile));
                 this.loadingMessage = 'Creating time...';
                 this.gl.startLoop();
                 this.gl.renderLoop.subscribe(delta => {
                     this.input.handle();
                     this.view.render(this.map.tiles);
                 });
-                this.bake.startBakeUpdating(this.gl.logicLoop);
+                this.render.startBakeUpdating(this.gl.logicLoop);
                 this.paths.startPathsUpdating(this.gl.logicLoop);
                 this.battles.startBattlesUpdating(this.gl.logicLoop);
                 this.tech.startResearchUpdating(this.gl.logicLoop);

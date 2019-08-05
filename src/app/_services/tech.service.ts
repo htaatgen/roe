@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {TechItem} from "../_models/TechItem";
+import {TechItem} from "../_interfaces/TechItem";
 import {BehaviorSubject} from "rxjs";
-import {Message} from "../_models/Message";
-import {TechItemResearch} from "../_models/TechItemResearch";
+import {Message} from "../_interfaces/Message";
+import {TechItemResearch} from "../_interfaces/TechItemResearch";
 
 @Injectable({
     providedIn: 'root'
