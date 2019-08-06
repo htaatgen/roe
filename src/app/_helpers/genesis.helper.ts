@@ -90,7 +90,7 @@ export class GenesisHelper {
         });
 
         map.forEach(tile => {
-            setTileTransitions(tile);
+            setAllTileTransitions(tile);
 
             if (tile.height >= 0) {
                 let chance = 0.05;
@@ -205,13 +205,21 @@ function setBiome(tile: Tile) {
 function setForests(tile: Tile) {
     if (tile.height > 0) {
         if (tile.biome == 'Arctic' && tile.moisture > 0.1) {
+            for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestSnow);
+            }
         } else if (tile.temperature < -3 && tile.moisture > 0) {
+            for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestPine);
+            }
         } else if (tile.temperature > -2 && tile.moisture > 0.1) {
+            for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestJungle);
+            }
         } else if (tile.moisture > 0) {
+            for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestTemp);
+            }
         }
     }
 }
@@ -232,49 +240,56 @@ function setMountains(tile: Tile) {
     }
 }
 
-function setTileTransitions(tile: Tile) {
-    if (tile.biome !== 'Grassland' && tile.height > 0) {
+
+function setAllTileTransitions(tile: Tile) {
+    setTileTransitions(tile, 'Grassland', 'grass');
+    setTileTransitions(tile, 'Arctic', 'snow');
+}
+
+function setTileTransitions(tile: Tile, biome, prefix) {
+    if (tile.biome !== biome && tile.height > 0) {
         let tileTransitionCode = '';
-        if (!isNullOrUndefined(tile.neighbours.north) && tile.neighbours.north.biome === 'Grassland') {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_n_' + Math.ceil(Math.random() * 1)]);
+        if (!isNullOrUndefined(tile.neighbours.north) && tile.neighbours.north.biome === biome) {
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_n_' + Math.ceil(Math.random() * 1)]);
             tileTransitionCode += 'n';
         }
-        if (!isNullOrUndefined(tile.neighbours.south) && tile.neighbours.south.biome === 'Grassland') {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_s_' + Math.ceil(Math.random() * 1)]);
+        if (!isNullOrUndefined(tile.neighbours.south) && tile.neighbours.south.biome === biome) {
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_s_' + Math.ceil(Math.random() * 1)]);
             tileTransitionCode += 's';
         }
-        if (!isNullOrUndefined(tile.neighbours.east) && tile.neighbours.east.biome === 'Grassland') {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_e_' + Math.ceil(Math.random() * 1)]);
+        if (!isNullOrUndefined(tile.neighbours.east) && tile.neighbours.east.biome === biome) {
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_e_' + Math.ceil(Math.random() * 1)]);
             tileTransitionCode += 'e';
         }
-        if (!isNullOrUndefined(tile.neighbours.west) && tile.neighbours.west.biome === 'Grassland') {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_w_' + Math.ceil(Math.random() * 1)]);
+        if (!isNullOrUndefined(tile.neighbours.west) && tile.neighbours.west.biome === biome) {
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_w_' + Math.ceil(Math.random() * 1)]);
             tileTransitionCode += 'w';
         }
         if (!isNullOrUndefined(tile.neighbours.northeast)
-            && tile.neighbours.northeast.biome === 'Grassland'
+            && tile.neighbours.northeast.biome === biome
             && !tileTransitionCode.includes('e')
             && !tileTransitionCode.includes('n')) {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_cne_' + Math.ceil(Math.random() * 1)]);
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_cne_' + Math.ceil(Math.random() * 1)]);
         }
         if (!isNullOrUndefined(tile.neighbours.northwest)
-            && tile.neighbours.northwest.biome === 'Grassland'
+            && tile.neighbours.northwest.biome === biome
             && !tileTransitionCode.includes('w')
             && !tileTransitionCode.includes('n')) {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_cnw_' + Math.ceil(Math.random() * 1)]);
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_cnw_' + Math.ceil(Math.random() * 1)]);
         }
         if (!isNullOrUndefined(tile.neighbours.southeast)
-            && tile.neighbours.southeast.biome === 'Grassland'
+            && tile.neighbours.southeast.biome === biome
             && !tileTransitionCode.includes('e')
             && !tileTransitionCode.includes('s')) {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_cse_' + Math.ceil(Math.random() * 1)]);
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_cse_' + Math.ceil(Math.random() * 1)]);
         }
         if (!isNullOrUndefined(tile.neighbours.southwest)
-            && tile.neighbours.southwest.biome === 'Grassland'
+            && tile.neighbours.southwest.biome === biome
             && !tileTransitionCode.includes('w')
             && !tileTransitionCode.includes('s')) {
-            tile.tileModifiers.unshift(['tile_edges', 'grass_csw_' + Math.ceil(Math.random() * 1)]);
+            tile.tileModifiers.unshift(['tile_edges', prefix + '_csw_' + Math.ceil(Math.random() * 1)]);
         }
     }
 }
+
 

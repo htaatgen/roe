@@ -1,10 +1,11 @@
 import {Tile} from "./Tile";
 import {Resource} from "./Resource";
+import {isNullOrUndefined} from "util";
 
 export class TileFeature {
     public id: number;
     public name: string;
-    public imageSet: any[] =[];
+    public imageSet: any[] = [];
     public locations: any[] = [];
     public tile: Tile;
     public resources: Resource[] = [];
@@ -25,7 +26,16 @@ export class TileFeature {
     public setRenderLocations() {
         this.locations = [];
         for (let i = 0; i < Math.ceil(this.renderCount * (this.tile.featureLocationCount / 100)); i++) {
-            const featureLocation = this.tile.getFeatureLocation();
+            let classLink = '';
+            if(this.renderCount > 1) {
+                [0, 2, 4, 6].forEach(dir => {
+                    const neighbour = this.tile.neighbourByDirection(dir);
+                    if (!isNullOrUndefined(neighbour) && !neighbour.hasFeature(this.name)) {
+                        classLink += 'nesw'[dir / 2];
+                    }
+                })
+            }
+            const featureLocation = this.tile.getFeatureLocation(classLink);
             if (featureLocation !== null) {
                 this.locations.push({
                     x: featureLocation.x,

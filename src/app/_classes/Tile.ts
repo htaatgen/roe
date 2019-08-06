@@ -175,10 +175,29 @@ export class Tile {
     }
 
     getFeatureLocation(avoidEdges = '') {
-        if(avoidEdges.includes('n')){
+        let locations = [...this.availableFeatureLocations];
 
+        if(avoidEdges.includes('n')){
+            locations = locations.filter(location=>{
+                return Math.random() > 1 - location.y;
+            })
         }
-        let randomLocation = this.availableFeatureLocations.splice(Math.floor(Math.random() * this.availableFeatureLocations.length), 1);
+        if(avoidEdges.includes('s')){
+            locations = locations.filter(location=>{
+                return Math.random() > location.y;
+            })
+        }
+        if(avoidEdges.includes('e')){
+            locations = locations.filter(location=>{
+                return Math.random() > location.x;
+            })
+        }
+        if(avoidEdges.includes('w')){
+            locations = locations.filter(location=>{
+                return Math.random() > 1 - location.x;
+            })
+        }
+        let randomLocation = locations.splice(Math.floor(Math.random() * locations.length), 1);
         if (randomLocation.length === 0) {
             return null;
         }

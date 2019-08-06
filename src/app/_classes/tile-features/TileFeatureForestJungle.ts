@@ -8,7 +8,7 @@ import {RarePelts} from "../resources/RarePelts";
 
 export class TileFeatureForestJungle extends TileFeature {
     constructor(tile: Tile) {
-        super(tile, 40, 0, 0, 'forest_jungle_', 3);
+        super(tile, 50, 0, 0, 'forest_jungle_', 3);
         this.name = 'Jungle';
         this.addedTravellingTime = 0.6;
         this.resources.push(new HardwoodLumber());
