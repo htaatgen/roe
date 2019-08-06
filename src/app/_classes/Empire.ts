@@ -20,6 +20,7 @@ export class Empire {
 
     name: string;
     colour: string;
+    textColour: string;
 
     constructor(capital: TileFeatureSettlement) {
         this.id = window.performance.now();
@@ -29,6 +30,7 @@ export class Empire {
         this.name = this.capital.nameMultiple;
 
         this.colour = ColourHelper.createColour();
+        this.textColour = ColourHelper.getContrastColour(this.colour);
         this.territory.push(this.capital.tile);
         this.ownedSettlements.push(this.capital);
     }

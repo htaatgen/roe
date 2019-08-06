@@ -191,7 +191,7 @@ function setBiome(tile: Tile) {
         tile.biome = 'Desert';
         tile.image = ['tiles', 'desert_' + Math.ceil(Math.random() * 3)];
         tile.travellingTime = 2;
-    } else if (tile.temperature < -4 && tile.moisture > 0) {
+    } else if (tile.temperature < -3.8 && tile.moisture > -1) {
         tile.biome = 'Arctic';
         tile.image = ['tiles', 'snow'];
         tile.travellingTime = 2;
@@ -204,19 +204,19 @@ function setBiome(tile: Tile) {
 
 function setForests(tile: Tile) {
     if (tile.height > 0) {
-        if (tile.biome == 'Arctic' && tile.moisture > 0.1) {
+        if (tile.biome == 'Arctic' && tile.moisture > 0) {
             for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestSnow);
             }
-        } else if (tile.temperature < -3 && tile.moisture > 0) {
+        } else if (tile.temperature < -3 && tile.moisture > 0 && tile.temperature > -3.8) {
             for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestPine);
             }
-        } else if (tile.temperature > -2 && tile.moisture > 0.1) {
+        } else if (tile.temperature > -2 && tile.moisture > 0.1 && tile.temperature > -3.8) {
             for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestJungle);
             }
-        } else if (tile.moisture > 0) {
+        } else if (tile.moisture > 0 && tile.temperature > -3.8) {
             for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestTemp);
             }

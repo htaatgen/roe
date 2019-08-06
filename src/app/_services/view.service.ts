@@ -117,12 +117,10 @@ export class ViewService {
                 const settlement = tile.getSettlement();
                 const location = this.toReal(tile.x + settlement.locations[0].x, tile.y + settlement.locations[0].y);
                 const textWidth = this.ctx.measureText(settlement.nameRoot).width;
-                this.ctx.globalAlpha = 0.4;
                 this.ctx.fillStyle = tile.owningEmpire.colour;
-                this.ctx.fillRect(location.x + 12 +50 - 0.5 * textWidth, location.y + 26 - 25, textWidth + 6, 11);
-                this.ctx.globalAlpha = 1.0;
-                this.ctx.fillStyle = '#ffffff';
-                this.ctx.fillText(settlement.nameRoot, location.x + 15+50 - 0.5 * textWidth, location.y + 35 -25)
+                this.ctx.fillRect(location.x + 12 + 50 - 0.5 * textWidth, location.y + 26 - 25, textWidth + 6, 11);
+                this.ctx.fillStyle = tile.owningEmpire.textColour;
+                this.ctx.fillText(settlement.nameRoot, location.x + 15 + 50 - 0.5 * textWidth, location.y + 35 - 25)
             }
         });
     }

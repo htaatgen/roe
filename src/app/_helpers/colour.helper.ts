@@ -15,4 +15,11 @@ export class ColourHelper {
             contrastColour + " 10px," +
             contrastColour + " 20px);";
     }
+
+    static getContrastColour(rgb) {
+        let r = parseInt(rgb.substring(1, 3), 16);
+        let g = parseInt(rgb.substring(3, 5), 16);
+        let b = parseInt(rgb.substring(5), 16);
+        return (r * 0.299 + g * 0.587 + b * 0.114) > 150 ? '#000000' : '#ffffff';
+    }
 }
