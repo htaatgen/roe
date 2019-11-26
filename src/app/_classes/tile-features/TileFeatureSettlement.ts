@@ -20,6 +20,7 @@ export class TileFeatureSettlement extends TileFeature {
     constructor(tile: Tile, empire: Empire = null, population: Population = null) {
         super(tile, 1, 5, 3, 'settlement_1_', 2);
         this.name = 'Settlement';
+        this.category = 'Settlement';
         this.lexicon = NameHelper.generateLexicon();
         this.nameBase = NameHelper.generateName(this.lexicon);
         this.nameRoot = this.nameBase + this.lexicon.suffix.root;

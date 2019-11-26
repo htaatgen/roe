@@ -11,6 +11,18 @@ export class ViewService {
     public viewport: { x: number, y: number, height: number, width: number };
     private ctx;
 
+    private orderedLocationModifiers = [
+        {x: 0.7, y: 0},
+        {x: 0.9, y: 0},
+        {x: 0.7, y: 0.2},
+        {x: 0.5, y: 0},
+        {x: 0.7, y: -0.2},
+        {x: 0.9, y: 0.2},
+        {x: 0.9, y: -0.2},
+        {x: 0.5, y: 0.2},
+        {x: 0.5, y: -0.2}
+    ];
+
     constructor(private gfx: GraphicsService, private paths: PathsService, private selection: SelectionService) {
     }
 
@@ -94,9 +106,12 @@ export class ViewService {
 
         //Draw unit banners
         tilesInView.forEach(tile => {
-            let tileCounter = 0.3;
-            tile.armies.forEach(army => {
-                const location = this.toReal(tile.x + tileCounter, tile.y);
+            tile.armies.forEach((army, armyCount) => {
+                if (this.orderedLocationModifiers[armyCount] == undefined) {
+                    return;
+                }
+                const mod = this.orderedLocationModifiers[armyCount];
+                const location = this.toReal(tile.x + mod.x, tile.y + mod.y);
                 const img = this.gfx['ui']['banner'];
                 this.ctx.drawImage(img, location.x + 10, location.y - 30);
                 this.ctx.globalAlpha = 0.4;
@@ -107,7 +122,6 @@ export class ViewService {
                 let startingLength = 0;
                 length = army.units.reduce((accumulator, unit) => accumulator + (unit.stats.size / unit.stats.maxSize), startingLength);
                 this.ctx.fillRect(location.x + 11, Math.round(location.y + 4 - length * 2), 11, Math.round(length * 2));
-                tileCounter += 0.2
             })
         });
 

@@ -9,6 +9,7 @@ export class TileFeatureForestTemp extends TileFeature {
     constructor(tile: Tile) {
         super(tile, 50, 0, 0, 'forest_temp_', 3);
         this.name = 'Temperate Forest';
+        this.category = 'Forest';
         this.addedTravellingTime = 0.9;
         this.resources.push(new Lumber());
 

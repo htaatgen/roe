@@ -12,6 +12,7 @@ export class TileFeatureMountain extends TileFeature {
     constructor(tile: Tile) {
         super(tile, 5, 1, 1, 'mountain_' , 2);
         this.name = 'Mountains';
+        this.category = 'Mountains';
         this.addedTravellingTime = 0.75;
         this.resources.push(new Stone());
 

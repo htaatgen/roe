@@ -73,7 +73,7 @@ export class Tile {
     }
 
     hasFeature(featureName) {
-        return this.features.find(element => element.name == featureName) !== undefined;
+        return this.features.find(element => element.name == featureName || element.category == featureName) !== undefined;
     }
 
     getFeature(featureName) {

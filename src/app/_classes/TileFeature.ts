@@ -5,6 +5,7 @@ import {isNullOrUndefined} from "util";
 export class TileFeature {
     public id: number;
     public name: string;
+    public category: string = 'Miscellaneous';
     public imageSet: any[] = [];
     public locations: any[] = [];
     public tile: Tile;

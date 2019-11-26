@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
             if (imageCount == 0) {
                 this.loadingMessage = 'Initialising map...';
                 this.view.setCanvas(this.mainCanvas, 0, 0, window.innerHeight - 5, window.innerWidth);
-                this.map.initMap(60, 60);
+                this.map.initMap(50, 50);
                 this.loadingMessage = 'Baking tiles...';
                 this.map.tiles.forEach(tile => this.render.determineAvailableFeatureLocations(tile));
                 this.map.tiles.forEach(tile => tile.updateRenderOrders());

@@ -9,6 +9,7 @@ import {TileFeatureForestTemp} from "../_classes/tile-features/TileFeatureForest
 import {TileFeatureSettlement} from "../_classes/tile-features/TileFeatureSettlement";
 import {TileFeatureVillage} from "../_classes/tile-features/TileFeatureVillage";
 import {isNullOrUndefined} from "util";
+import {TileFeatureGrain} from "../_classes/tile-features/TileFeatureGrain";
 
 export class GenesisHelper {
 
@@ -87,6 +88,7 @@ export class GenesisHelper {
             setBiome(tile);
             setForests(tile);
             setMountains(tile);
+            setCrops(tile);
         });
 
         map.forEach(tile => {
@@ -212,7 +214,7 @@ function setForests(tile: Tile) {
             for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestPine);
             }
-        } else if (tile.temperature > -2 && tile.moisture > 0.1 && tile.temperature > -3.8) {
+        } else if (tile.temperature > -2 && tile.moisture > 0.1) {
             for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
                 tile.addFeature(TileFeatureForestJungle);
             }
@@ -237,6 +239,16 @@ function setMountains(tile: Tile) {
     } else if (tile.height > 1.6) {
         tile.addFeature(TileFeatureMountainLow);
         tile.travellingTime *= 1.5;
+    }
+}
+
+function setCrops(tile: Tile) {
+    if (tile.height >= 0) {
+        if (tile.moisture > -1 && tile.temperature > -3.8 && tile.temperature < -2 && !tile.hasFeature('Forest') && !tile.hasFeature('Mountains')) {
+            for (let i = 0; i <= Math.ceil(tile.moisture); i++) {
+                tile.addFeature(TileFeatureGrain);
+            }
+        }
     }
 }
 

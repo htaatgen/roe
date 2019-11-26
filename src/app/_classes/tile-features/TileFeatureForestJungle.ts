@@ -10,6 +10,7 @@ export class TileFeatureForestJungle extends TileFeature {
     constructor(tile: Tile) {
         super(tile, 50, 0, 0, 'forest_jungle_', 3);
         this.name = 'Jungle';
+        this.category = 'Forest';
         this.addedTravellingTime = 0.6;
         this.resources.push(new HardwoodLumber());
 

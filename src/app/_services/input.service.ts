@@ -39,7 +39,8 @@ export class InputService {
                     break;
                 case this.click.ARMY_MOVE:
                     if (this.selection.armySelected() && this.selection.army.value.units.length > 0) {
-                        this.getDistance();
+                        this.paths.cancelArmyMove(this.selection.army);
+                        this.moveArmy();
                     }
                     break;
             }
@@ -58,7 +59,7 @@ export class InputService {
         this.leftClick = this.click.SELECT_TILE;
     }
 
-    private getDistance() {
+    private moveArmy() {
         const location = this.view.toMap(this.ctrl.clickLocation.x, this.ctrl.clickLocation.y);
         const selectedTile = this.map.findTileByCoordinates(Math.round(location.x) - 1, Math.round(location.y));
         let path = this.map.getPath(this.selection.army.value.location, selectedTile);
