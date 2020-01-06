@@ -6,7 +6,7 @@ import {isNullOrUndefined} from "util";
 import {SelectionService} from "../../_services/selection.service";
 import {ModalNewUnitComponent} from "../modal-new-unit/modal-new-unit.component";
 import {MatDialog} from "@angular/material";
-import {ModalTechtreeComponent} from "../modal-techtree/modal-techtree.component";
+import {ModalTechtreeComponent} from "../../header/modal-techtree/modal-techtree.component";
 
 @Component({
     selector: 'app-settlement',
@@ -19,12 +19,5 @@ export class SettlementComponent{
                 private dialog: MatDialog) {
     }
 
-    openTechtree(): void {
-        this.dialog.open(ModalTechtreeComponent, {
-            height: '400px',
-            width: '600px',
-            panelClass: 'modal'
-        });
-    }
 
 }

@@ -174,7 +174,7 @@ export class Tile {
         }
     }
 
-    getFeatureLocation(avoidEdges = '') {
+    getFeatureLocation(avoidEdges = '', renderMargin = 0) {
         let locations = [...this.availableFeatureLocations];
 
         if(avoidEdges.includes('n')){
@@ -197,6 +197,16 @@ export class Tile {
                 return Math.random() > 1 - location.x;
             })
         }
+        if(renderMargin > 0) {
+            locations = locations.filter(location=>{
+                return renderMargin < location.x
+                    && 1 - renderMargin > location.x
+                    && renderMargin < location.y
+                    && 1 - renderMargin > location.y
+            })
+        }
+
+
         let randomLocation = locations.splice(Math.floor(Math.random() * locations.length), 1);
         if (randomLocation.length === 0) {
             return null;

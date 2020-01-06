@@ -14,11 +14,10 @@ export class TileFeatureSettlement extends TileFeature {
     nameMultiple: string;
 
     settlementLevel = 1;
-    populations: Population[] = [];
-    techtree: TechItem[] = [];
+    population: Population;
 
     constructor(tile: Tile, empire: Empire = null, population: Population = null) {
-        super(tile, 1, 5, 3, 'settlement_1_', 2);
+        super(tile, 1, 5, 0.2, 'settlement_1_', 2);
         this.name = 'Settlement';
         this.category = 'Settlement';
         this.lexicon = NameHelper.generateLexicon();
@@ -31,7 +30,8 @@ export class TileFeatureSettlement extends TileFeature {
         if (population == null) {
             population = new Population(this, 'tribal', 0, 0, 0)
         }
-        this.populations.push(population);
+        this.population = population;
+
         if (empire == null) {
             empire = new Empire(this);
         }

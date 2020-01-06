@@ -25,7 +25,7 @@ export class ModalNewUnitComponent {
 
     listAttributes() {
         let attributes = [];
-        this.selection.settlement.value.techtree.forEach(tech => attributes = attributes.concat(tech.unitAttributes));
+        this.selection.settlement.value.tile.owningEmpire.techtree.forEach(tech => attributes = attributes.concat(tech.unitAttributes));
         return attributes;
     }
 
@@ -41,7 +41,7 @@ export class ModalNewUnitComponent {
     }
 
     addUnit(unitName) {
-        this.selection.settlement.value.populations[0].units.push(this.unit);
+        this.selection.settlement.value.population.units.push(this.unit);
         this.selection.settlement.next(this.selection.settlement.value);
         this.unit = new UnitBlueprint(this.selection.tile);
     }

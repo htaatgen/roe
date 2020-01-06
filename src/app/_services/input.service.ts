@@ -39,7 +39,7 @@ export class InputService {
                     break;
                 case this.click.ARMY_MOVE:
                     if (this.selection.armySelected() && this.selection.army.value.units.length > 0) {
-                        this.paths.cancelArmyMove(this.selection.army);
+                        this.paths.cancelArmyMove(this.selection.army.value);
                         this.moveArmy();
                     }
                     break;

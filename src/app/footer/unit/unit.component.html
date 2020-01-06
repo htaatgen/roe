@@ -5,7 +5,7 @@
     <div *ngFor="let unit of units" (click)="buildUnit(unit)" class="unit-tile">
         <img [src]="gfx[unit.image[0]][unit.image[1]].src">
         <div class="unit-name">
-            {{unit.name}}
+            {{unit.name}} - {{unit.getRecruitingCost()}}
         </div>
     </div>
 </div>

@@ -20,6 +20,7 @@ export class Unit {
         this.id = window.performance.now();
         this.originTile = originTile;
         this.owningArmy = owningArmy;
+        this.owningArmy.units.push(this);
     }
 
     updateStats() {
@@ -32,6 +33,7 @@ export class Unit {
             this.stats.size += attribute.stats.size;
             this.stats.maxSize += attribute.stats.maxSize;
             this.stats.upkeep += attribute.stats.upkeep;
+            this.stats.cost += attribute.stats.cost;
         })
     }
 

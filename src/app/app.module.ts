@@ -9,7 +9,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {EmpiresComponent} from './header/empires/empires.component';
+import {EmpiresComponent} from './header/modal-empires/empires.component';
 import {FooterComponent} from './footer/footer.component';
 import {SettlementComponent} from './footer/settlement/settlement.component';
 import {TileComponent} from './footer/tile/tile.component';
@@ -17,12 +17,15 @@ import {UnitComponent} from './footer/unit/unit.component';
 import {ModalNewUnitComponent} from './footer/modal-new-unit/modal-new-unit.component';
 import {ArmyComponent} from './footer/army/army.component';
 import {MessageComponent} from './header/message/message.component';
-import {ModalTechtreeComponent} from './footer/modal-techtree/modal-techtree.component';
+import {ModalTechtreeComponent} from './header/modal-techtree/modal-techtree.component';
 import {SidebarRightComponent} from './sidebar-right/sidebar-right.component';
 import {ListArmiesComponent} from './sidebar-right/list-armies/list-armies.component';
-import {ListResearchComponent} from './sidebar-right/list-research/list-research.component';
+import {ListResearchComponent} from './sidebar-left/list-research/list-research.component';
 import {ListSettlementsComponent} from './sidebar-right/list-settlements/list-settlements.component';
 import {ModalNewGameComponent} from './modal-new-game/modal-new-game.component';
+import { SidebarLeftComponent } from './sidebar-left/sidebar-left.component';
+import { TileArmiesComponent } from './footer/tile-armies/tile-armies.component';
+import { EmpireStatsComponent } from './header/empire-stats/empire-stats.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +44,10 @@ import {ModalNewGameComponent} from './modal-new-game/modal-new-game.component';
         ListArmiesComponent,
         ListResearchComponent,
         ListSettlementsComponent,
-        ModalNewGameComponent
+        ModalNewGameComponent,
+        SidebarLeftComponent,
+        TileArmiesComponent,
+        EmpireStatsComponent
     ],
     imports: [
         BrowserModule,

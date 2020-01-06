@@ -18,7 +18,8 @@
 
 .unit-list {
     list-style: none;
-    display:flex;
-    flex-flow: row;
-    width: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 2px;
+    width:100%;
 }

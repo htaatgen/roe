@@ -12,6 +12,8 @@ import {RenderService} from "./_services/render.service";
 import {MatDialog} from "@angular/material";
 import {ModalNewGameComponent} from "./modal-new-game/modal-new-game.component";
 import {PlayerService} from "./_services/player.service";
+import {RecruitingService} from "./_services/recruiting.service";
+import {ResourcesService} from "./_services/resources.service";
 
 @Component({
     selector: 'app-root',
@@ -31,6 +33,8 @@ export class AppComponent implements OnInit {
                 private battles: BattleService,
                 private paths: PathsService,
                 private tech: TechService,
+                private recruiting: RecruitingService,
+                private resources: ResourcesService,
                 private render: RenderService,
                 private player: PlayerService,
                 private dialog: MatDialog
@@ -58,6 +62,8 @@ export class AppComponent implements OnInit {
                 this.paths.startPathsUpdating(this.gl.logicLoop);
                 this.battles.startBattlesUpdating(this.gl.logicLoop);
                 this.tech.startResearchUpdating(this.gl.logicLoop);
+                this.recruiting.startRecruitingUpdating(this.gl.logicLoop);
+                this.resources.startResourcesUpdating(this.gl.logicLoop);
 
                 this.loadingMessage = 'Done...';
                 this.openNewGame();

@@ -1,0 +1,12 @@
+<ul class="ul-nav">
+  <li>
+    <button *ngIf="selection.settlementSelected()" (click)="createArmy()">Make army</button>
+  </li>
+  <li *ngFor="let army of selection.tile.value.armies">
+    <button (click)="selectArmy(army)"
+            [class]="selection.armySelected() && selection.army.value.id == army.id ? 'selected':''"
+            [style]="sanitizer.bypassSecurityTrustStyle(army.bannerStyle)">
+      Army: {{army.units.length}}
+    </button>
+  </li>
+</ul>

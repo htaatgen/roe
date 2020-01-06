@@ -10,7 +10,7 @@ export class TileFeatureVillage extends TileFeature {
     nameMultiple: string;
 
     constructor(tile: Tile) {
-        super(tile, 1, 3, 3,'village_',2);
+        super(tile, 1, 3, 0.2,'village_',2);
         this.name = 'Village';
         this.category = 'Settlement';
         this.lexicon = NameHelper.generateLexicon();

@@ -1,50 +1,13 @@
-<div>
-
-    <ul class="ul-nav">
-        <li>
-            <button *ngIf="selection.settlementSelected()" (click)="createArmy()">Make army</button>
-        </li>
-        <li *ngFor="let army of selection.tile.value.armies">
-            <button (click)="selectArmy(army)"
-                    [class]="selection.armySelected() && selection.army.value.id == army.id ? 'selected':''"
-                    [style]="sanitizer.bypassSecurityTrustStyle(army.bannerStyle)">
-                Army: {{army.units.length}}
-            </button>
-        </li>
-    </ul>
-    <div *ngIf="selection.armySelected()">
+<div *ngIf="selection.armySelected()">
         <span [style]="sanitizer.bypassSecurityTrustStyle(selection.army.value.bannerStyle)">
             {{selection.army.value.owningEmpire.capital.nameSingular}} Army
         </span>
-        <div class="unit-list">
-            <div *ngFor="let unit of selection.army.value.units; let i = index" class="unit-tile">
-                <img [src]="gfx[unit.image[0]][unit.image[1]].src">
-                <div class="unit-name">
-                    {{unit.name}}
-                </div>
+    <div class="unit-list">
+        <div *ngFor="let unit of selection.army.value.units; let i = index" class="unit-tile">
+            <img [src]="gfx[unit.image[0]][unit.image[1]].src">
+            <div class="unit-name">
+                {{unit.name}}
             </div>
         </div>
     </div>
-
-
-    <!--<div class="sub-panel">-->
-    <!--<ul class="unit-list">-->
-    <!--<li *ngFor="let unit of selectedTile.units;let i = index" class="unit-tile" (click)="selectUnit(unit, i)">-->
-    <!--<img [src]="gfx[unit.image[0]][unit.image[1]].src">-->
-    <!--<div class="unit-name">-->
-    <!--{{unit.name}}-->
-    <!--</div>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="sub-panel">-->
-    <!--<ul class="unit-list">-->
-    <!--<li *ngFor="let unit of selectedUnits.units;let i = index" class="unit-tile" (click)="selectUnit(unit, i)">-->
-    <!--<img [src]="gfx[unit.image[0]][unit.image[1]].src">-->
-    <!--<div class="unit-name">-->
-    <!--{{unit.name}}-->
-    <!--</div>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
 </div>

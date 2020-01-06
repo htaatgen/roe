@@ -13,14 +13,14 @@ export class TileFeature {
     public addedTravellingTime = 1;
     public renderCount;
     public renderOrder;
-    public renderCenteringWeight;
+    public renderMargin;
 
-    constructor(tile: Tile, renderCount = 1, renderOrder = 1, renderCenteringWeight = 0, imageBase = '', imageCount = 0) {
+    constructor(tile: Tile, renderCount = 1, renderOrder = 1, renderMargin = 0, imageBase = '', imageCount = 0) {
         this.id = window.performance.now();
         this.tile = tile;
         this.renderCount = renderCount;
         this.renderOrder = renderOrder;
-        this.renderCenteringWeight = renderCenteringWeight;
+        this.renderMargin = renderMargin;
         Array.from(Array(imageCount).keys()).forEach(key => this.imageSet.push(['features', imageBase + (key + 1)]));
     }
 
@@ -36,7 +36,7 @@ export class TileFeature {
                     }
                 })
             }
-            const featureLocation = this.tile.getFeatureLocation(classLink);
+            const featureLocation = this.tile.getFeatureLocation(classLink, this.renderMargin);
             if (featureLocation !== null) {
                 this.locations.push({
                     x: featureLocation.x,

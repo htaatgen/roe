@@ -10,7 +10,7 @@ import {Gemstones} from "../resources/Gemstones";
 
 export class TileFeatureMountainLow extends TileFeature {
     constructor(tile: Tile) {
-        super(tile, 5, 1, 1, 'mountain_low_',2);
+        super(tile, 5, 1, 0, 'mountain_low_',2);
         this.name = 'Low Mountains';
         this.category = 'Mountains';
         this.addedTravellingTime = 0.5;

@@ -24,8 +24,8 @@ export class TechnologiesEnum {
             type: 'material',
             name: 'Copperworking',
             unitAttributes: [
-                new UnitAttribute('Copper spear', 'weapon', new UnitStats(3, 0, 0, 1, 0, 20)),
-                new UnitAttribute('Copper axe', 'weapon', new UnitStats(4, 0, 0, 0, 0, 20))
+                new UnitAttribute('Copper spear', 'weapon', new UnitStats(3, 0, 0, 1, 0, 20, 20)),
+                new UnitAttribute('Copper axe', 'weapon', new UnitStats(4, 0, 0, 0, 0, 20, 20))
             ],
             tileAttributes: [],
             settlementAttributes: [],
@@ -37,8 +37,8 @@ export class TechnologiesEnum {
             type: 'material',
             name: 'Ironworking',
             unitAttributes: [
-                new UnitAttribute('Iron spear', 'weapon', new UnitStats(4, 0, 0, 1, 0, 20)),
-                new UnitAttribute('Iron axe', 'weapon', new UnitStats(4, 0, 0, 0, 0, 20))
+                new UnitAttribute('Iron spear', 'weapon', new UnitStats(4, 0, 0, 1, 0, 20, 20)),
+                new UnitAttribute('Iron axe', 'weapon', new UnitStats(4, 0, 0, 0, 0, 20, 20))
             ],
             tileAttributes: [],
             settlementAttributes: [],
@@ -50,8 +50,8 @@ export class TechnologiesEnum {
             type: 'material',
             name: 'Steelworking',
             unitAttributes: [
-                new UnitAttribute('Steel spear', 'weapon', new UnitStats(5, 0, 0, 1, 0, 30)),
-                new UnitAttribute('Steel axe', 'weapon', new UnitStats(5, 0, 0, 0, 0, 30))
+                new UnitAttribute('Steel spear', 'weapon', new UnitStats(5, 0, 0, 1, 0, 30, 30)),
+                new UnitAttribute('Steel axe', 'weapon', new UnitStats(5, 0, 0, 0, 0, 30, 30))
             ],
             tileAttributes: [],
             settlementAttributes: [],
@@ -63,9 +63,9 @@ export class TechnologiesEnum {
             type: 'weapon',
             name: 'Shortswords',
             unitAttributes: [
-                new UnitAttribute('Copper short sword', 'weapon', new UnitStats(3, 2, 0, 0, 0, 30)),
-                new UnitAttribute('Iron short sword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, [2])),
-                new UnitAttribute('Steel short sword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, [3]))
+                new UnitAttribute('Copper short sword', 'weapon', new UnitStats(3, 2, 0, 0, 0, 30, 30)),
+                new UnitAttribute('Iron short sword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, 50, 100,[2])),
+                new UnitAttribute('Steel short sword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, 50, 100,[3]))
             ],
             tileAttributes: [],
             settlementAttributes: [],
@@ -78,8 +78,8 @@ export class TechnologiesEnum {
             name: 'Longswords',
             unitAttributes: [
                 new UnitAttribute('Copper longsword', 'weapon', new UnitStats(3, 2, 0, 0, 0, 30)),
-                new UnitAttribute('Iron longsword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, [2])),
-                new UnitAttribute('Steel longsword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, [3]))
+                new UnitAttribute('Iron longsword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, 50, 100,[2])),
+                new UnitAttribute('Steel longsword', 'weapon', new UnitStats(4, 3, 0, 0, 0, 50, 50, 100,[3]))
             ],
             tileAttributes: [],
             settlementAttributes: [],
@@ -92,8 +92,8 @@ export class TechnologiesEnum {
             name: 'Round Shield',
             unitAttributes: [
                 new UnitAttribute('Wood round shield', 'shield', new UnitStats(0, 2, 0, 0, 0, 30)),
-                new UnitAttribute('Iron round shield', 'shield', new UnitStats(0, 3, 0, 0, 0, 30, [2])),
-                new UnitAttribute('Steel round shield', 'shield', new UnitStats(0, 4, 0, 0, 0, 30, [3])),
+                new UnitAttribute('Iron round shield', 'shield', new UnitStats(0, 3, 0, 0, 0, 30, 30, 100,[2])),
+                new UnitAttribute('Steel round shield', 'shield', new UnitStats(0, 4, 0, 0, 0, 30, 30, 100,[3])),
             ],
             tileAttributes: [],
             settlementAttributes: [],

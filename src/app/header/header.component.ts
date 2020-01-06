@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material";
-import {EmpiresComponent} from "./empires/empires.component";
+import {EmpiresComponent} from "./modal-empires/empires.component";
 import {MapService} from "../_services/map.service";
+import {ModalTechtreeComponent} from "./modal-techtree/modal-techtree.component";
 
 @Component({
     selector: 'app-header',
@@ -28,6 +29,13 @@ export class HeaderComponent implements OnInit {
             map: JSON.stringify(this.map.tiles.map(tile => tile.toJson()))
         }
         console.log(save);
+    }
+
+    openTechtree(): void {
+        this.dialog.open(ModalTechtreeComponent, {
+            height: '400px',
+            width: '600px'
+        });
     }
 
 }

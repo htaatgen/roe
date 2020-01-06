@@ -18,6 +18,8 @@ export class Empire {
 
     lexicon: Lexicon;
 
+    resources = 0;
+
     name: string;
     colour: string;
     textColour: string;

@@ -10,7 +10,6 @@ export class Population {
     administrativeSkill: number;
     economicSkill: number;
     units: UnitBlueprint[] = [];
-    technologies: Technology[] = [];
 
     constructor(homeSettlement: TileFeatureSettlement, type = 'tribal', militarySkill = 0, administrativeSkill = 0, economicSkill = 0) {
         this.homeSettlement = homeSettlement;

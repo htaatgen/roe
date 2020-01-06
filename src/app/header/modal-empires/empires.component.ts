@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MapService} from "../../_services/map.service";
 
 @Component({
-  selector: 'app-empires',
+  selector: 'app-modal-empires',
   templateUrl: './empires.component.html',
   styleUrls: ['./empires.component.css']
 })

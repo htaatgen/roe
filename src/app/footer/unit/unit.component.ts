@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material";
 import {Army} from "../../_classes/Army";
 import {InputService} from "../../_services/input.service";
 import {SelectionService} from "../../_services/selection.service";
+import {RecruitingService} from "../../_services/recruiting.service";
 
 @Component({
     selector: 'app-unit',
@@ -20,7 +21,8 @@ export class UnitComponent {
                 public gfx: GraphicsService,
                 private dialog: MatDialog,
                 private input: InputService,
-                private selection: SelectionService)
+                private selection: SelectionService,
+                private recruiting: RecruitingService)
     {
         this.selection.settlement.subscribe(() => {
             this.getUnitsOfSettlement();
@@ -30,20 +32,14 @@ export class UnitComponent {
     getUnitsOfSettlement() {
         this.units = [];
         if (this.selection.settlementSelected()) {
-            this.selection.settlement.value.populations.forEach(population => {
-                population.units.forEach(unitBlueprint => {
-                    this.units.push(unitBlueprint);
-                });
+            this.selection.settlement.value.population.units.forEach(unitBlueprint => {
+                this.units.push(unitBlueprint);
             });
         }
     }
 
     buildUnit(unitBlueprint) {
-        if (!this.selection.armySelected()) {
-            this.selection.tile.value.armies.push(new Army(this.selection.tile.value));
-            this.input.selectArmy(this.selection.tile.value.armies[this.selection.tile.value.armies.length-1]);
-        }
-        this.selection.army.value.units.push(unitBlueprint.spawn(this.selection.army.value))
+        this.recruiting.addRecruiting(this.selection.army.value, unitBlueprint);
     }
 
     openNewUnit(): void {
