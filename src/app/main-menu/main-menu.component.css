@@ -1,0 +1,25 @@
+button {
+    margin: 1em;
+}
+
+.main-menu {
+    position: relative;
+    top: 35vh;
+    width: 10em;
+    margin: auto;
+}
+
+.center {
+    display: block;
+    margin: 1em auto;
+    width: 8em;
+    padding: 0.5em 0;
+}
+
+.slider {
+    width:6em;
+}
+
+h1 {
+    text-align: center;
+}

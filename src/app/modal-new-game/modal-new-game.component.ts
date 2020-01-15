@@ -3,7 +3,7 @@ import {MapService} from "../_services/map.service";
 import {PlayerService} from "../_services/player.service";
 import {SelectionService} from "../_services/selection.service";
 import {BiomeHelper} from "../_helpers/biome.helper";
-import {MatDialogRef} from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
     selector: 'app-modal-new-game',

@@ -1,15 +1,2 @@
-<app-header></app-header>
-
-<canvas #mainCanvas
-        (window:keydown)="ctrl.press($event.keyCode)"
-        (window:keyup)="ctrl.release($event.keyCode)"
-        (mousedown)="ctrl.mousePress($event.x, $event.y)"
-        (mouseup)="ctrl.mouseRelease($event.x, $event.y)"
-></canvas>
-<app-sidebar-right></app-sidebar-right>
-<app-footer></app-footer>
-<div class="loading-screen" *ngIf="loadingMessage !== null">
-    <div class="title-box panel">
-    {{loadingMessage}}
-    </div>
-</div>
+<app-main-menu (gameStart)="gameStart = $event" *ngIf="gameStart === null"></app-main-menu>
+<app-canvas *ngIf="gameStart !== null" [gameStart]="gameStart"></app-canvas>

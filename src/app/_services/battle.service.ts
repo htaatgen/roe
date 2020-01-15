@@ -14,13 +14,14 @@ export class BattleService {
     startBattlesUpdating(logicLoop) {
         logicLoop.subscribe(time => {
             this.map.tiles.forEach(tile => {
-                if (tile.armies.length > 1) {
+                if (tile.armies.length > 1 && this.getEmpireCount(tile) > 1) {
+                    tile.armies.filter(army => army.units.length === 0).forEach(army => army.destroy());
                     this.handleBattle(tile);
                 }
 
                 if (tile.armies.length > 0 &&
                     (tile.owningEmpire == null ||
-                        tile.armies.filter(army=>army.units.length > 0).findIndex(army => army.owningEmpire.id == tile.owningEmpire.id) == -1)
+                        tile.armies.filter(army => army.units.length > 0).findIndex(army => army.owningEmpire.id == tile.owningEmpire.id) == -1)
                 ) {
                     this.handleConquest(tile);
                 }
@@ -85,11 +86,21 @@ export class BattleService {
 
     private handleConquest(tile: Tile) {
         if (tile.hasSettlement()) {
-            tile.owningEmpire.ownedSettlements.splice(tile.owningEmpire.ownedSettlements.findIndex(ownedSettlement => ownedSettlement.id === tile.getSettlement().id),1);
+            tile.owningEmpire.ownedSettlements.splice(tile.owningEmpire.ownedSettlements.findIndex(ownedSettlement => ownedSettlement.id === tile.getSettlement().id), 1);
             tile.armies[0].owningEmpire.ownedSettlements.push(tile.getSettlement());
         }
         tile.owningEmpire = tile.armies[0].owningEmpire;
         tile.armies[0].owningEmpire.territory.push(tile);
     };
+
+    private getEmpireCount(tile) {
+        let empireIds = [];
+        tile.armies.forEach(army => {
+            if (!empireIds.includes(army.owningEmpire.id)) {
+                empireIds.push(army.owningEmpire.id)
+            }
+        });
+        return empireIds.length;
+    }
 
 }

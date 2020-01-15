@@ -174,31 +174,49 @@ export class Tile {
         }
     }
 
+    static fromJson(json): Tile {
+        let tile = new Tile(json.x, json.y);
+
+        tile.image = json.image;
+        tile.tileModifiers = json.tileModifiers;
+        tile.coast = json.coast;
+        tile.biome = json.biome;
+        tile.height = json.height;
+        tile.moisture = json.moisture;
+        tile.temperature = json.temperature;
+        tile.travellingTime = json.travellingTime;
+        tile.visited = json.visited;
+
+        tile.updateRenderOrders();
+
+        return tile;
+    }
+
     getFeatureLocation(avoidEdges = '', renderMargin = 0) {
         let locations = [...this.availableFeatureLocations];
 
-        if(avoidEdges.includes('n')){
-            locations = locations.filter(location=>{
+        if (avoidEdges.includes('n')) {
+            locations = locations.filter(location => {
                 return Math.random() > 1 - location.y;
             })
         }
-        if(avoidEdges.includes('s')){
-            locations = locations.filter(location=>{
+        if (avoidEdges.includes('s')) {
+            locations = locations.filter(location => {
                 return Math.random() > location.y;
             })
         }
-        if(avoidEdges.includes('e')){
-            locations = locations.filter(location=>{
+        if (avoidEdges.includes('e')) {
+            locations = locations.filter(location => {
                 return Math.random() > location.x;
             })
         }
-        if(avoidEdges.includes('w')){
-            locations = locations.filter(location=>{
+        if (avoidEdges.includes('w')) {
+            locations = locations.filter(location => {
                 return Math.random() > 1 - location.x;
             })
         }
-        if(renderMargin > 0) {
-            locations = locations.filter(location=>{
+        if (renderMargin > 0) {
+            locations = locations.filter(location => {
                 return renderMargin < location.x
                     && 1 - renderMargin > location.x
                     && renderMargin < location.y

@@ -6,6 +6,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSliderModule } from "@angular/material/slider";
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -23,9 +24,15 @@ import {ListArmiesComponent} from './sidebar-right/list-armies/list-armies.compo
 import {ListResearchComponent} from './sidebar-left/list-research/list-research.component';
 import {ListSettlementsComponent} from './sidebar-right/list-settlements/list-settlements.component';
 import {ModalNewGameComponent} from './modal-new-game/modal-new-game.component';
-import { SidebarLeftComponent } from './sidebar-left/sidebar-left.component';
-import { TileArmiesComponent } from './footer/tile-armies/tile-armies.component';
-import { EmpireStatsComponent } from './header/empire-stats/empire-stats.component';
+import {SidebarLeftComponent} from './sidebar-left/sidebar-left.component';
+import {TileArmiesComponent} from './footer/tile-armies/tile-armies.component';
+import {EmpireStatsComponent} from './header/empire-stats/empire-stats.component';
+import {SaveComponent} from './header/save/save.component';
+import {LoadComponent} from './header/load/load.component';
+import {ModalMenuComponent} from './header/modal-menu/modal-menu.component';
+import {CanvasComponent} from './canvas/canvas.component';
+import {ModalLoadGameComponent} from './modal-load-game/modal-load-game.component';
+import {MainMenuComponent} from './main-menu/main-menu.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +54,13 @@ import { EmpireStatsComponent } from './header/empire-stats/empire-stats.compone
         ModalNewGameComponent,
         SidebarLeftComponent,
         TileArmiesComponent,
-        EmpireStatsComponent
+        EmpireStatsComponent,
+        SaveComponent,
+        LoadComponent,
+        ModalMenuComponent,
+        CanvasComponent,
+        ModalLoadGameComponent,
+        MainMenuComponent
     ],
     imports: [
         BrowserModule,
@@ -55,7 +68,8 @@ import { EmpireStatsComponent } from './header/empire-stats/empire-stats.compone
         MatDialogModule,
         MatTabsModule,
         MatListModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatSliderModule
     ],
     entryComponents: [
         EmpiresComponent,
@@ -64,8 +78,8 @@ import { EmpireStatsComponent } from './header/empire-stats/empire-stats.compone
         UnitComponent,
         ModalNewUnitComponent,
         ModalTechtreeComponent,
-        ModalNewGameComponent
-    ],
+        ModalNewGameComponent,
+        ModalMenuComponent],
     providers: [],
     bootstrap: [AppComponent]
 })

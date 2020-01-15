@@ -3,7 +3,7 @@ import {ViewService} from "../../_services/view.service";
 import {GraphicsService} from "../../_services/graphics.service";
 import {UnitBlueprint} from "../../_classes/UnitBlueprint";
 import {ModalNewUnitComponent} from "../modal-new-unit/modal-new-unit.component";
-import {MatDialog} from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import {Army} from "../../_classes/Army";
 import {InputService} from "../../_services/input.service";
 import {SelectionService} from "../../_services/selection.service";

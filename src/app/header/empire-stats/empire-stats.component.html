@@ -1,3 +1,6 @@
-<div *ngIf="!isNullOrUndefined(player.empire)" >
-  {{player.empire.name}} Resources: {{player.empire.resources}}
+<div *ngIf="!isNullOrUndefined(player.empire)" class="stats-box">
+    {{player.empire.name}}
+    Resources: {{player.empire.resources}}
+    Settlements: {{player.empire.ownedSettlements.length}}
+    Armies: {{player.empire.armies.length}}
 </div>

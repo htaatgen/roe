@@ -1,0 +1,33 @@
+<div class="panel main-menu">
+    <div *ngIf="tab === null">
+        <h1 class="center" >Main menu</h1>
+        <button class="center" (click)="tab = 'new'">New Game</button>
+        <button class="center" (click)="tab = 'load'">Load Game</button>
+        <button class="center" (click)="tab = 'multiplayer'">Multiplayer</button>
+    </div>
+
+
+    <div *ngIf="tab==='new'">
+        <h1 class="center" >New game</h1>
+
+            <mat-slider min="10" max="100" value="50" [value]="size"></mat-slider>
+            {{size}}
+
+
+        <button class="center" (click)="newGame()">Start Game</button>
+    </div>
+
+
+    <div *ngIf="tab==='load'">
+        <h1 class="center" >Load game</h1>
+        <button class="center" (click)="loadGame()">Start Game</button>
+    </div>
+
+    <div *ngIf="tab==='multiplayer'">
+        <h1 class="center" >Multiplayer</h1>
+        <button class="center" (click)="loadGame()">Start Multiplayer</button>
+    </div>
+    <div *ngIf="tab !== null">
+        <button (click)="tab = null">Return</button>
+    </div>
+</div>

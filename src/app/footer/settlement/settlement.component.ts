@@ -5,7 +5,7 @@ import {TileFeatureSettlement} from "../../_classes/tile-features/TileFeatureSet
 import {isNullOrUndefined} from "util";
 import {SelectionService} from "../../_services/selection.service";
 import {ModalNewUnitComponent} from "../modal-new-unit/modal-new-unit.component";
-import {MatDialog} from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import {ModalTechtreeComponent} from "../../header/modal-techtree/modal-techtree.component";
 
 @Component({

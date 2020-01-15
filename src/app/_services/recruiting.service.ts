@@ -23,7 +23,6 @@ export class RecruitingService {
                 (recruiting, key) => {
                     if (recruiting.progress > recruiting.unitBlueprint.getRecruitingTime()) {
                         recruiting.unitBlueprint.spawn(recruiting.target);
-                        console.log(recruiting.target);
                         this.recruiting.splice(key, 1);
                         this.recruitingComplete.next({message: 'Training complete: ' + recruiting.unitBlueprint.name})
                     } else {
